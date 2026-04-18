@@ -16,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+
         <TopNav />
-        {children}
+        <div className="container mx-auto p-10">  {children}
+        </div>
       </body>
     </html>
   );

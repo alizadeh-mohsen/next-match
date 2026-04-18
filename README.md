@@ -41,7 +41,9 @@ npx create-next-match@latest
 2-Add styling library NextUI/HeroUI 
 3- Each page can have its layout layout.tsx
 4-(xxx)/login to hide route
-
+5-React hook form
+6-NextAuth
+7-Prisma ORM
 
 
 
