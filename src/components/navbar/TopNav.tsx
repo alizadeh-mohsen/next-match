@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import NavLink from './NavLink'
 
 export default function TopNav() {
     return (
@@ -11,9 +12,9 @@ export default function TopNav() {
 
             {/* Center Links */}
             <div className='flex space-x-6'>
-                <Link href="/members" className='hover:text-gray-300'>Members</Link>
-                <Link href="/lists" className='hover:text-gray-300'>Lists</Link>
-                <Link href="/messages" className='hover:text-gray-300'>Messages</Link>
+                <NavLink label="Members" href="/members" />
+                <NavLink label="Messages" href="/messages" />
+                <NavLink label="Lists" href="/lists" />
             </div>
 
             {/* Right Side */}

@@ -41,3 +41,11 @@ npx create-next-match@latest
 2-Add styling library NextUI/HeroUI 
 3- Each page can have its layout layout.tsx
 4-(xxx)/login to hide route
+
+
+
+
+
+
+Hooks:
+-usePathName()
