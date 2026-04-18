@@ -45,6 +45,10 @@ npx create-next-match@latest
     -npm i react-hook-form zod @hookform/resolvers
 6-NextAuth/AuthJs
 7-Prisma ORM
+9-Neon PostgreSql
+    -npx prisma generate
+    -npx prisma db push
+    -npx prisma studio
 
 
 
