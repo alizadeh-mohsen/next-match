@@ -1,14 +1,14 @@
 "use client";
 
-import { logincSchema, LoginSchema } from "@/lib/schemas/loginSchema";
+import { registerSchema, RegisterSchema } from "@/lib/schemas/registerSchema";
 import { Button, Card, FieldError, Form, Input, Label, Link, TextField } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 
-export function LoginForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
-        resolver: zodResolver(logincSchema),
+export function RegisterForm() {
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterSchema>({
+        resolver: zodResolver(registerSchema),
         mode: "onTouched"
     });
 
@@ -20,19 +20,28 @@ export function LoginForm() {
     return (
         <Card className="w-full max-w-md">
             <Card.Header className="flex flex-col items-center gap-2">
-                <Card.Title className="text-2xl font-semibold">Login</Card.Title>
+                <Card.Title className="text-2xl font-semibold">Register</Card.Title>
                 <Card.Description>Enter your credentials to access your account</Card.Description>
             </Card.Header>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Card.Content>
                     <div className="flex flex-col gap-4">
+                        <TextField name="name" isRequired isInvalid={!!errors.name}>
+                            <Label>Name</Label>
+                            <Input placeholder="John Doe" variant="secondary"
+                                {...register("name")}
+                            />
+                            {errors.name && (
+                                <FieldError>{errors.name.message}</FieldError>
+                            )}
+                        </TextField>
                         <TextField name="email" type="email" isRequired isInvalid={!!errors.email}>
                             <Label>Email</Label>
                             <Input placeholder="email@example.com" variant="secondary"
                                 {...register("email")}
                             />
                             {errors.email && (
-                                <FieldError>email is required</FieldError>
+                                <FieldError>{errors.email.message}</FieldError>
                             )}
                         </TextField>
                         <TextField name="password" type="password" isRequired isInvalid={!!errors.password}>

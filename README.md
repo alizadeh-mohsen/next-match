@@ -43,7 +43,7 @@ npx create-next-match@latest
 4-(xxx)/login to hide route
 5-React hook form & Zod
     -npm i react-hook-form zod @hookform/resolvers
-6-NextAuth
+6-NextAuth/AuthJs
 7-Prisma ORM
 
 
