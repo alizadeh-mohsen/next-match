@@ -1,19 +1,20 @@
 "use client";
 
-import { Button, Card, Form, Input, Label, Link, TextField } from "@heroui/react";
+import { logincSchema, LoginSchema } from "@/lib/schemas/loginSchema";
+import { Button, Card, FieldError, Form, Input, Label, Link, TextField } from "@heroui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 
 export function LoginForm() {
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const data: Record<string, string> = {};
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
+        resolver: zodResolver(logincSchema),
+        mode: "onTouched"
+    });
 
-        // Convert FormData to plain object
-        formData.forEach((value, key) => {
-            data[key] = value.toString();
-        });
 
-        alert("Form submitted successfully!");
+    const onSubmit = (data: unknown) => {
+        console.log("Form Data:", data);
     };
 
     return (
@@ -22,16 +23,23 @@ export function LoginForm() {
                 <Card.Title>Login</Card.Title>
                 <Card.Description>Enter your credentials to access your account</Card.Description>
             </Card.Header>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <Card.Content>
                     <div className="flex flex-col gap-4">
-                        <TextField name="email" type="email">
+                        <TextField name="email" type="email" isRequired isInvalid={!!errors.email}>
                             <Label>Email</Label>
-                            <Input placeholder="email@example.com" variant="secondary" />
+                            <Input placeholder="email@example.com" variant="secondary"
+                                {...register("email")}
+                            />
+                            {errors.email && (
+                                <FieldError>email is required</FieldError>
+                            )}
                         </TextField>
-                        <TextField name="password" type="password">
-                            <Label>Password</Label>
-                            <Input placeholder="••••••••" variant="secondary" />
+                        <TextField name="password" type="password" isRequired isInvalid={!!errors.password}>
+                            <Label  >Password</Label>
+                            <Input placeholder="••••••••" variant="secondary"
+                                {...register("password")} />
+                            {errors.password && (<FieldError>{errors.password.message}</FieldError>)}
                         </TextField>
                     </div>
                 </Card.Content>
@@ -44,6 +52,6 @@ export function LoginForm() {
                     </Link>
                 </Card.Footer>
             </Form>
-        </Card>
+        </Card >
     );
 }
