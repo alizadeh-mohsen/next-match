@@ -1,5 +1,6 @@
 "use client";
 
+import { registerUser } from "@/actions/authActions";
 import { registerSchema, RegisterSchema } from "@/lib/schemas/registerSchema";
 import { Button, Card, FieldError, Form, Input, Label, Link, TextField } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,13 +9,15 @@ import { useForm } from "react-hook-form";
 
 export function RegisterForm() {
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterSchema>({
-        resolver: zodResolver(registerSchema),
+        // resolver: zodResolver(registerSchema),
         mode: "onTouched"
     });
 
 
-    const onSubmit = (data: unknown) => {
+    const onSubmit = async (data: RegisterSchema) => {
         console.log("Form Data:", data);
+        const result = await registerUser(data);
+        console.log("Registration Result:", result);
     };
 
     return (
